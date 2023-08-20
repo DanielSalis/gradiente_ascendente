@@ -1,0 +1,10 @@
+.centered-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}

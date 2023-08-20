@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "SnapLearn",
+  "version": "1.0",
+  "description": "Extensão que garante aquele descontão marato através do conhecimento",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ]
+}

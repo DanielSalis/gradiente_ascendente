@@ -42,7 +42,12 @@ export class AiAdapter {
   }
 
   private hadleResult(result: string): Record<string, unknown> {
-    return JSON.parse(result.replace('\n', ''))
+    try {
+      return JSON.parse(result.replace('\n', ''))
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error on parse result')
+    }
   }
 
   private getInstance(): OpenAI {

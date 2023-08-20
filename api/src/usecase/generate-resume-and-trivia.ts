@@ -6,6 +6,7 @@ import { AiAdapter } from '@app/adapter/ai.adapter'
 import { promptGenerateResumeAndTriviaTemplate } from '@app/adapter/templates/prompt-generate-resume-and-trivia.template'
 import { ErrorService } from '@app/service/error.service'
 import { ValidateService } from '@app/service/validate.service'
+import ErrorType from '@app/constant/error.enum'
 
 @Injectable()
 export class GenerateResumeAndTrivia {
@@ -16,8 +17,14 @@ export class GenerateResumeAndTrivia {
   ) {}
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
-    const content = await this.getContent(input.contentUrl)
-    const contentGenerated = await this.aiAdapter.completion(promptGenerateResumeAndTriviaTemplate(content))
+    let contentGenerated: Record<string, unknown>
+    try {
+      const content = await this.getContent(input.contentUrl)
+      contentGenerated = await this.aiAdapter.completion(promptGenerateResumeAndTriviaTemplate(content))
+    } catch (error: unknown) {
+      this.errorService.throw(['Invalid Content URL'], ErrorType.UNPROCESSABLE_ENTITY)
+    }
+
     return Object.assign(new GenerateResumeOutput(), {
       resume: contentGenerated.summary,
       trivia: contentGenerated.questions

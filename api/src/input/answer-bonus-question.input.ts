@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator'
 
 export class AnswerBonusQuestionInput {
@@ -11,4 +11,9 @@ export class AnswerBonusQuestionInput {
   @IsNotEmpty()
   @ApiProperty({ description: '' })
   answer: string
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiHideProperty()
+  userId: string
 }

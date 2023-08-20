@@ -23,7 +23,7 @@ export class RetrieveUserInfoOutput {
   currentExperiencePoints: number
 
   @ApiProperty({ description: '' })
-  nextExperiencePoints: number
+  nextLevelExperiencePoints: number
 
   @ApiProperty({ description: '' })
   currentLevel: number

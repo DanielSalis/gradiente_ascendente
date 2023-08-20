@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/database/Dockerfile
     image: 'postgres'
-    container_name: ${PG_CONTAINER_NAME}
+    container_name: hackathon-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -14,16 +14,16 @@ services:
     ports:
       - '45432:5432'
     restart: unless-stopped
-  hackathon-api:
-    build:
-      context: .
-      dockerfile: docker/api/Dockerfile
-      args:
-        ENVIRONMENT: ${environment}
-    container_name: hackathon-api
-    ports:
-      - 80:80
-    env_file:
-      - .env
-    depends_on:
-      - hackathon-db
+  # hackathon-api:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/api/Dockerfile
+  #     args:
+  #       ENVIRONMENT: ${environment}
+  #   container_name: hackathon-api
+  #   ports:
+  #     - 80:80
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - hackathon-db

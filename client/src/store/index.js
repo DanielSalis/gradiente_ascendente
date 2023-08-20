@@ -1,18 +1,13 @@
 import Vuex from "vuex";
 import Vue from "vue";
-import test from "./modules/test";
-import quiz from "./modules/quiz";
+import content from "./modules/content";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    test: {
-      ...test,
-      namespaced: true,
-    },
-    quiz: {
-      ...quiz,
+    content: {
+      ...content,
       namespaced: true,
     }
   }

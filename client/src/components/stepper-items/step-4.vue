@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h3>Parabéns! Você acertou 2 de 3 questões e ganhou 5 pontos</h3>
+    <h3>Parabéns! Você acertou {{ rightAnswers }} de {{ quiz.length }} questões e ganhou {{ rightAnswers }} pontos</h3>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
-    name: 'Step4Item'
+    name: 'Step4Item',
+    computed: {
+      ...mapState('quiz', ['quiz', 'rightAnswers']),
+    }
   }
 </script>

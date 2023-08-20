@@ -1,17 +1,20 @@
 <template>
   <div>
     <div
-      v-for="(item, index) in response"
+      v-for="(item, index) in quiz"
       :key="index"
     >
-      <span>{{ item.title }}</span>
-      <div
-        v-for="(answer, annsindex) in item.alternatives"
-        :key="annsindex"
-        @click="handleAlternativeClick(item, answer)"
-      >
-        <span>{{ answer }}</span>
-      </div>
+      <h4>{{ item.title }}</h4>
+
+      <v-radio-group v-model="selectedOption[index]">
+        <v-radio
+          v-for="(option, optionIndex) in item.alternatives"
+          :key="optionIndex"
+          :label="option"
+          :value="option"
+          @change="setAnswers(selectedOption)"
+        />
+      </v-radio-group>
     </div>
 
     <v-divider />
@@ -19,46 +22,22 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex'
   export default {
     name: 'Step3Item',
     data() {
       return {
-        rightAnswers: 0,
-        response: [
-          {
-            'title': 'Teste',
-            'alternatives': [
-              "a) teste teste",
-              "b) teste teste 2",
-              "c) teste teste 3",
-            ],
-            'answer': 'a) teste teste'
-          },
-          {
-            'title': 'Teste2',
-            'alternatives': [
-              "a) teste teste",
-              "b) teste teste 2",
-              "c) teste teste 3",
-            ],
-            'answer': 'a) teste teste'
-          }
-        ]
+        selectedOption: [],
       }
     },
     computed:{
+      ...mapState('quiz', ['quiz']),
       answers() {
         return this.rightAnswers === this.response.length
       }
     },
     methods: {
-      handleAlternativeClick(item, answer){
-        console.log(answer)
-        if (answer === item.answer) {
-          this.rightAnswers++;
-          console.log("acertou");
-        }
-      }
+      ...mapActions('quiz', ['setAnswers']),
     }
   }
 </script>

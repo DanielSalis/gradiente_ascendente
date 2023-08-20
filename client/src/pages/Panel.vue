@@ -26,11 +26,11 @@
           <div
             :class="[
               'mt-4',
-              {'navigation-buttons': currentStep > 1 }
+              {'navigation-buttons': showReturnButton }
             ]"
           >
             <v-btn
-              v-if="currentStep>1"
+              v-if="showReturnButton"
               size="small"
               @click="()=>{
                 currentStep--;
@@ -59,6 +59,7 @@
   import Step3 from "../components/stepper-items/step-3.vue";
   import Step4 from "../components/stepper-items/step-4.vue";
 
+  import { mapState, mapActions } from 'vuex'
   export default {
     name: 'PanelPage',
     components: {
@@ -94,13 +95,34 @@
         ]
       };
     },
+    computed: {
+      ...mapState('quiz', ['quiz', 'answers']),
+      showReturnButton() {
+        return this.currentStep > 1 && this.currentStep < this.steps.length
+      },
+    },
     methods: {
+      ...mapActions('quiz', ['savePoints']),
       advance() {
-        this.currentStep++;
-        if (this.currentStep > this.steps.length) {
+        switch(this.currentStep)
+        {
+        case 3:
+          this.checkAnswers()
+          break;
+        case 4:
           this.$router.push("/wallet")
         }
+
+        this.currentStep++;
       },
+      checkAnswers() {
+        let rightAnswers = this.quiz.filter((question, index) => {
+          return question.answer == this.answers[index]
+        })
+
+        console.log(rightAnswers.length);
+        this.savePoints(rightAnswers.length);
+      }
     }
   }
 </script>

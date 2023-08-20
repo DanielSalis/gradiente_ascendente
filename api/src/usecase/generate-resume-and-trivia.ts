@@ -13,28 +13,20 @@ export class GenerateResumeAndTrivia {
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
     const content = await this.getContent(input.contentUrl)
-    const contentGenerated = await this.aiAdapter.completion(promptGenerateResumeAndTriviaTemplate(content))
+    const contentGenerated = await this.aiAdapter.callOpenAIChatAPI(promptGenerateResumeAndTriviaTemplate(content))
     console.log(contentGenerated)
     return Promise.resolve(<GenerateResumeOutput>{})
   }
 
   private async getContent(contentUrl: string): Promise<string> {
-    return new Promise(function (resolve, reject) {
-      try {
-        let content = ''
-        http.request(contentUrl, (res) => {
-          const data = []
+    const response = await fetch(contentUrl)
 
-          res.on('data', (_) => data.push(_))
-          res.on('end', () => {
-            const body = Buffer.concat(data).toString()
-            content = body.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g, '')[0].replace(/<[^>]+>/g, '')
-          })
-        })
-        resolve(content)
-      } catch (error) {
-        reject(error)
-      }
-    })
+    if (!response.ok) {
+      throw new Error(`HTTP request failed with status: ${response.status}`)
+    }
+
+    const text = await response.text()
+    const body = text.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g)[0].replace(/<[^>]+>/g, '')
+    return body
   }
 }

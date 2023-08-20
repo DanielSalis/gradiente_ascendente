@@ -18,7 +18,7 @@ export class WalletEntity {
   currentLevel: number
 
   @Column()
-  coupons: string[]
+  coupons: string
 
   @Column()
   @CreateDateColumn()

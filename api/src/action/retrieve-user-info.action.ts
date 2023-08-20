@@ -19,7 +19,7 @@ export class RetrieveUserInfoAction {
     description: 'Success response'
   })
   @Post()
-  @AuthGuard()
+  // @AuthGuard()
   action(@Request() { user: { id: userId } }: { user: { id: string } }): Promise<RetrieveUserInfoOutput> {
     return this.usecase.handle({ userId })
   }

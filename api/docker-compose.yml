@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: docker/database/Dockerfile
+    image: 'postgres'
+    container_name: ${PG_CONTAINER_NAME}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+  hackaton-api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+      args:
+        ENVIRONMENT: ${environment}
+    container_name: api
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    depends_on:
+      - db

@@ -15,7 +15,7 @@ export class PartnerEntity {
   enable: boolean
 
   @Column()
-  business_category: string[]
+  business_category: string
 
   @Column()
   @CreateDateColumn()

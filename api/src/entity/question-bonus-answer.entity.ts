@@ -9,7 +9,7 @@ export class QuestionBonusAnswerEntity {
   id: string
 
   @Column()
-  value: string[]
+  value: string
 
   @Column()
   @CreateDateColumn()

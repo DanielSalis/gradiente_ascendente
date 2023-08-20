@@ -17,7 +17,8 @@ export class GenerateResumeAndTrivia {
   ) {}
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
-    const inputParsed = await this.validateService.validateAndTransformInput(GenerateResumeInput, input)
+    const inputParsed = input
+    // const inputParsed = await this.validateService.validateAndTransformInput(GenerateResumeInput, input)
     let contentGenerated: Record<string, unknown>
     try {
       const content = await this.getContent(inputParsed.contentUrl)

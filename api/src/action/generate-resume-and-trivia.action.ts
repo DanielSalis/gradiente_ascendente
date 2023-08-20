@@ -22,7 +22,7 @@ export class GenerateResumeAndTriviaAction {
     description: 'Success response'
   })
   @Post()
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   action(@Body() input: GenerateResumeInput, @Request() request): Promise<GenerateResumeOutput> {
     return this.usecase.handle({ ...input, userId: request.user.id })
   }

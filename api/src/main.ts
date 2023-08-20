@@ -5,6 +5,7 @@ import { AppModule } from '@app/app.module'
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule)
+  app.enableCors()
   const config = new DocumentBuilder().setTitle('Hackaton API').setDescription('Quero 2023').setVersion('1.0.0').build()
 
   const document = SwaggerModule.createDocument(app, config)

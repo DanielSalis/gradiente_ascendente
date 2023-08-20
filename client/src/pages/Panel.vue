@@ -26,7 +26,7 @@
           <div
             :class="[
               'mt-4',
-              {'panel_navigation': currentStep > 1 }
+              {'navigation-buttons': currentStep > 1 }
             ]"
           >
             <v-btn
@@ -42,7 +42,7 @@
             <v-btn
               color="primary"
               size="small"
-              @click="currentStep++"
+              @click="advance"
             >
               {{ step.buttonText }}
             </v-btn>
@@ -94,12 +94,13 @@
         ]
       };
     },
+    methods: {
+      advance() {
+        this.currentStep++;
+        if (this.currentStep > this.steps.length) {
+          this.$router.push("/wallet")
+        }
+      },
+    }
   }
 </script>
-
-<style lang="scss" scoped>
-.panel_navigation {
-  display: flex;
-  justify-content: space-between;
-}
-</style>

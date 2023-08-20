@@ -1,6 +1,8 @@
 <template>
   <v-container class="centered-container">
-    <div class="login__container mt-8">
+    <div class="login__container">
+      <h3>Informe seu e-mail e senha</h3>
+
       <v-text-field
         solo
         hide-details
@@ -20,6 +22,10 @@
         to="/panel"
       >
         Entrar
+      </v-btn>
+
+      <v-btn to="/register">
+        Não tem conta? Crie uma
       </v-btn>
     </div>
   </v-container>

@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import UserEntity from './user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
+
+import UserEntity from '@app/entity/user.entity'
 
 @Entity()
 export class TriviaHistoryEntity {
@@ -7,8 +8,8 @@ export class TriviaHistoryEntity {
   id: string
 
   @Column('json')
-  rightAnsw: object
-  
+  triviaGenerated: object
+
   @Column('json')
   answers: object
 
@@ -19,9 +20,7 @@ export class TriviaHistoryEntity {
   @CreateDateColumn()
   createdAt: Date
 
-  @ManyToOne(() => UserEntity, (user: UserEntity) => user.th) 
-  public user: UserEntity;
+  @ManyToOne(() => UserEntity, (user: UserEntity) => user.id)
+  user: UserEntity
 }
-
-
-export default TriviaHistoryEntity;
+export default TriviaHistoryEntity

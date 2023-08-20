@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import TransactionEntity from './transaction.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+
+import TransactionEntity from '@app/entity/transaction.entity'
 
 @Entity()
 export class WalletEntity {
@@ -20,11 +21,7 @@ export class WalletEntity {
   @UpdateDateColumn()
   updatedAt: Date
 
-  @OneToMany(() => TransactionEntity, (transaction: TransactionEntity) => transaction.coupon)
-  public transaction: TransactionEntity[];
+  @OneToMany(() => TransactionEntity, (transaction: TransactionEntity) => transaction.wallet)
+  transactions: TransactionEntity[]
 }
-
-
-//relação one-to-one com user id
-
-export default WalletEntity;
+export default WalletEntity

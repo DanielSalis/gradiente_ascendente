@@ -29,7 +29,9 @@
         Criar conta
       </v-btn>
 
-      <v-btn>Já tenho uma conta</v-btn>
+      <v-btn to="/login">
+        Já tenho uma conta
+      </v-btn>
     </div>
   </v-container>
 </template>

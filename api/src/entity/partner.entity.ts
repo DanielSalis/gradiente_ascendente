@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import QuestionBonusEntity from './question-bonus.entity';
-import CouponEntity from './coupon.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+
+import QuestionBonusEntity from '@app/entity/question-bonus.entity'
+import CouponEntity from '@app/entity/coupon.entity'
 
 @Entity()
 export class PartnerEntity {
@@ -17,9 +18,6 @@ export class PartnerEntity {
   business_category: string[]
 
   @Column()
-  vality: Date
-
-  @Column()
   @CreateDateColumn()
   createdAt: Date
 
@@ -27,11 +25,10 @@ export class PartnerEntity {
   @UpdateDateColumn()
   updatedAt: Date
 
-  @OneToMany(() => QuestionBonusEntity, (questiobonus: QuestionBonusEntity) => questiobonus.partner)
-  public questiobonus: QuestionBonusEntity[];
+  @OneToMany('QuestionBonusEntity', (questionbonus: QuestionBonusEntity) => questionbonus.partner)
+  questionsBonus: QuestionBonusEntity[]
 
-  @OneToMany(() => CouponEntity, (coupon: CouponEntity) => coupon.partner)
-  public coupon: CouponEntity[];
-
+  @OneToMany('CouponEntity', (coupon: CouponEntity) => coupon.partner)
+  coupons: CouponEntity[]
 }
-export default PartnerEntity;
+export default PartnerEntity

@@ -5,6 +5,8 @@ export class QuestionBonusAnswerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
+  // adicionar relaccao com question bonus entity e person entity
+
   @Column()
   value: string[]
 
@@ -16,5 +18,4 @@ export class QuestionBonusAnswerEntity {
   @UpdateDateColumn()
   updatedAt: Date
 }
-
-export default QuestionBonusAnswerEntity;
+export default QuestionBonusAnswerEntity

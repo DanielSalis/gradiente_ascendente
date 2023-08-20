@@ -6,13 +6,16 @@ export class UserTriviaConfigEntity {
   id: string
 
   @Column()
-  currentPoints: number
+  questionPointsToEarn: number
 
   @Column()
-  currentXP: number
+  questionXpToEarn: number
 
   @Column()
-  level: number
+  triviasToLevelUp: number
+
+  @Column()
+  currentLevel: number
 
   @Column()
   @CreateDateColumn()
@@ -22,6 +25,4 @@ export class UserTriviaConfigEntity {
   @UpdateDateColumn()
   updatedAt: Date
 }
-
-
-export default UserTriviaConfigEntity;
+export default UserTriviaConfigEntity

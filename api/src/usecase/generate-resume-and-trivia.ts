@@ -27,6 +27,6 @@ export class GenerateResumeAndTrivia {
 
     const text = await response.text()
     const body = text.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g)[0].replace(/<[^>]+>/g, '')
-    return body.slice(0, 4096)
+    return body.slice(0, 2048)
   }
 }

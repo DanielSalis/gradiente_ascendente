@@ -2,7 +2,7 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiBadRequestResponse } from '@ne
 import { Body, Controller, Post } from '@nestjs/common'
 
 import { Error } from '@app/swagger/error.model'
-import { PartnerKeyGuard } from '@app/guards/partner-key.guard'
+// import { PartnerKeyGuard } from '@app/guards/partner-key.guard'
 import { CreateBonusQuestions } from '@app/usecase/create-bonus-questions'
 import { CreateBonusQuestionsInput } from '@app/input/create-bonus-questions.input'
 import { CreateBonusQuestionsOutput } from '@app/output/create-bonus-questions.output'
@@ -17,6 +17,7 @@ export class CreateBonusQuestionsAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: CreateBonusQuestionsOutput,
     description: 'Success response'
   })
   @Post()

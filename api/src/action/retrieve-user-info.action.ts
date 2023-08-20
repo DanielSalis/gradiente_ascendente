@@ -16,6 +16,7 @@ export class RetrieveUserInfoAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: RetrieveUserInfoOutput,
     description: 'Success response'
   })
   @Post()

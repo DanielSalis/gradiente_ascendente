@@ -17,6 +17,7 @@ export class ExportLeadsAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: ExportLeadsOutput,
     description: 'Success response'
   })
   @Post()

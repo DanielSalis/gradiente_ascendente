@@ -17,6 +17,7 @@ export class RetrieveCouponsAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: RetrieveCouponsOutput,
     description: 'Success response'
   })
   @Get()

@@ -17,6 +17,7 @@ export class CreateCouponAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: CreateCouponOutput,
     description: 'Success response'
   })
   @Post()

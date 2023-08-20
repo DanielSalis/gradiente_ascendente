@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Teste",
+  "version": "1.0",
+  "description": "Uma extensão que permite acessar o conteúdo da aba atual.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ]
+}

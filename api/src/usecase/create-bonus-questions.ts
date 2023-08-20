@@ -8,6 +8,7 @@ import QuestionBonusEntity from '@app/entity/question-bonus.entity'
 import PartnerEntity from '@app/entity/partner.entity'
 import { ErrorService } from '@app/service/error.service'
 import { ValidateService } from '@app/service/validate.service'
+import ErrorType from '@app/constant/error.enum'
 
 @Injectable()
 export class CreateBonusQuestions {
@@ -19,11 +20,13 @@ export class CreateBonusQuestions {
   ) {}
 
   async handle(input: CreateBonusQuestionsInput): Promise<CreateBonusQuestionsOutput> {
-    for await (const question of input) {
+    const inputParsed = await this.validateService.validateAndTransformInput(CreateBonusQuestionsInput, input)
+
+    for await (const question of inputParsed) {
       const partner = await this.partnerRepository.findOne({ where: { id: question.partnerId } })
 
       if (!partner) {
-        throw new Error('Partner not found')
+        this.errorService.throw(['Partner does not exist'], ErrorType.UNPROCESSABLE_ENTITY)
       }
 
       await this.questionBonusRepository.save({

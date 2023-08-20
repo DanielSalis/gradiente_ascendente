@@ -24,29 +24,30 @@ export class SaveTriviaAnswers {
   ) {}
 
   async handle(input: SaveTriviaAnswersInput): Promise<SaveTriviaAnswersOutput> {
+    const inputParsed = await this.validateService.validateAndTransformInput(SaveTriviaAnswersInput, input)
     let rightAnswers = 0
 
-    input.triviaGenerated.forEach((questionData) => {
-      const answerFound = input.triviaAnswers.find((answer) => answer.id === questionData.id)
+    inputParsed.triviaGenerated.forEach((questionData) => {
+      const answerFound = inputParsed.triviaAnswers.find((answer) => answer.id === questionData.id)
       if (answerFound.optionId === questionData.correctOptionId) {
         rightAnswers++
       }
     })
 
-    const triviaConfig = await this.triviaConfigRepository.findOne({ where: { user: { id: input.userId } } })
+    const triviaConfig = await this.triviaConfigRepository.findOne({ where: { user: { id: inputParsed.userId } } })
     const pointsEarned = rightAnswers * triviaConfig.questionPointsToEarn
     const xpEarned = rightAnswers * triviaConfig.questionXpToEarn
 
     await this.triviaHistoryRepository.save(
       Object.assign(new TriviaHistoryEntity(), {
-        triviaGenerated: input.triviaGenerated,
-        answers: input.triviaAnswers,
+        triviaGenerated: inputParsed.triviaGenerated,
+        answers: inputParsed.triviaAnswers,
         score: pointsEarned,
-        user: { id: input.userId }
+        user: { id: inputParsed.userId }
       })
     )
 
-    const wallet = await this.walletRepository.findOne({ where: { person: { id: input.userId } } })
+    const wallet = await this.walletRepository.findOne({ where: { person: { id: inputParsed.userId } } })
 
     wallet.points += pointsEarned
     wallet.currenExperiencePoints += xpEarned

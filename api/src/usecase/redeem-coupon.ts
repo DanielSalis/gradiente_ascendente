@@ -10,6 +10,7 @@ import WalletEntity from '@app/entity/wallet.entity'
 import TransactionEntity from '@app/entity/transaction.entity'
 import { ValidateService } from '@app/service/validate.service'
 import { ErrorService } from '@app/service/error.service'
+import ErrorType from '@app/constant/error.enum'
 
 @Injectable()
 export class RedeemCoupon {
@@ -23,10 +24,20 @@ export class RedeemCoupon {
   ) {}
 
   async handle(input: RedeemCouponInput): Promise<RedeemCouponOutput> {
-    const userWithPersonAndWallet = await this.userRepository.findOne({ where: { id: input.userId }, relations: ['person', 'wallet'] })
-    const coupon = await this.couponEntity.findOne({ where: { code: input.couponCode } })
-    if (!coupon || !userWithPersonAndWallet || coupon.quantity === 0) {
-      throw new Error('Coupon not found')
+    const inputParsed = await this.validateService.validateAndTransformInput(RedeemCouponInput, input)
+    const userWithPersonAndWallet = await this.userRepository.findOne({ where: { id: inputParsed.userId }, relations: ['person', 'wallet'] })
+    const coupon = await this.couponEntity.findOne({ where: { code: inputParsed.couponCode } })
+
+    if (!coupon) {
+      this.errorService.throw(['Coupon not found'], ErrorType.UNPROCESSABLE_ENTITY)
+    }
+
+    if (coupon.quantity === 0) {
+      this.errorService.throw(['Coupon not available'], ErrorType.UNPROCESSABLE_ENTITY)
+    }
+
+    if (!userWithPersonAndWallet) {
+      this.errorService.throw(['User not found'], ErrorType.UNPROCESSABLE_ENTITY)
     }
 
     const newWallet = await this.walletRepository.save(

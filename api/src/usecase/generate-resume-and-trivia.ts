@@ -17,9 +17,10 @@ export class GenerateResumeAndTrivia {
   ) {}
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
+    const inputParsed = await this.validateService.validateAndTransformInput(GenerateResumeInput, input)
     let contentGenerated: Record<string, unknown>
     try {
-      const content = await this.getContent(input.contentUrl)
+      const content = await this.getContent(inputParsed.contentUrl)
       contentGenerated = await this.aiAdapter.completion(promptGenerateResumeAndTriviaTemplate(content))
     } catch (error: unknown) {
       this.errorService.throw(['Invalid Content URL'], ErrorType.UNPROCESSABLE_ENTITY)
@@ -35,7 +36,7 @@ export class GenerateResumeAndTrivia {
     const response = await fetch(contentUrl)
 
     if (!response.ok) {
-      throw new Error(`HTTP request failed with status: ${response.status}`)
+      this.errorService.throw(['Invalid Content URL'], ErrorType.UNPROCESSABLE_ENTITY)
     }
 
     const text = await response.text()

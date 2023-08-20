@@ -9,6 +9,7 @@ import QuestionBonusEntity from '@app/entity/question-bonus.entity'
 import UserEntity from '@app/entity/user.entity'
 import { ErrorService } from '@app/service/error.service'
 import { ValidateService } from '@app/service/validate.service'
+import ErrorType from '@app/constant/error.enum'
 
 @Injectable()
 export class AnswerBonusQuestion {
@@ -20,21 +21,22 @@ export class AnswerBonusQuestion {
     private readonly validateService: ValidateService
   ) {}
   async handle(input: AnswerBonusQuestionInput): Promise<AnswerBonusQuestionOutput> {
-    const questionBonus = await this.questionBonusRepository.findOne({ where: { id: input.questionId } })
+    const inputParsed = await this.validateService.validateAndTransformInput(AnswerBonusQuestionInput, input)
+    const questionBonus = await this.questionBonusRepository.findOne({ where: { id: inputParsed.questionId } })
 
     if (!questionBonus) {
-      throw new Error('Question not found')
+      this.errorService.throw(['Question does not exist'], ErrorType.UNPROCESSABLE_ENTITY)
     }
 
-    const userWithPerson = await this.userRepository.findOne({ where: { id: input.userId }, relations: ['person'] })
+    const userWithPerson = await this.userRepository.findOne({ where: { id: inputParsed.userId }, relations: ['person'] })
 
     if (!userWithPerson.person) {
-      throw new Error('Person not found')
+      this.errorService.throw(['Person does not exist'], ErrorType.UNPROCESSABLE_ENTITY)
     }
 
     await this.questionBonusAnswerRepository.save(
       Object.assign(new QuestionBonusAnswerEntity(), {
-        value: input.answer,
+        value: inputParsed.answer,
 
         questionBonus,
         person: userWithPerson.person

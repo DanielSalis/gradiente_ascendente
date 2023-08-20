@@ -6,6 +6,9 @@ export class QuestionBonusAnswerEntity {
   id: string
 
   @Column()
+  value: string[]
+
+  @Column()
   @CreateDateColumn()
   createdAt: Date
 
@@ -13,3 +16,5 @@ export class QuestionBonusAnswerEntity {
   @UpdateDateColumn()
   updatedAt: Date
 }
+
+export default QuestionBonusAnswerEntity;

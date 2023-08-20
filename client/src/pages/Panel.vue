@@ -96,21 +96,24 @@
       };
     },
     computed: {
-      ...mapState('quiz', ['quiz', 'answers']),
+      ...mapState('content', ['quiz', 'answers']),
       showReturnButton() {
         return this.currentStep > 1 && this.currentStep < this.steps.length
       },
     },
     methods: {
-      ...mapActions('quiz', ['savePoints']),
+      ...mapActions('content', ['savePoints', 'fetchContent']),
       advance() {
         switch(this.currentStep)
         {
-        case 3:
-          this.checkAnswers()
-          break;
-        case 4:
-          this.$router.push("/wallet")
+          case 1:
+            this.fetchContent(this.$route.query.param)
+            break;
+          case 3:
+            this.checkAnswers()
+            break;
+          case 4:
+            this.$router.push("/wallet")
         }
 
         this.currentStep++;

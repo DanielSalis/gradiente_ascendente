@@ -33,12 +33,39 @@
         Já tenho uma conta
       </v-btn>
     </div>
+
+    {{ test }}
   </v-container>
 </template>
 
 <script>
+  import {api} from '../utils/api';
+  import { mapState } from 'vuex'
+
   export default {
-    name: 'HomePage'
+    name: 'HomePage',
+    data(){
+      return {
+        posts: [],
+        errors: []
+      }
+    },
+
+    computed: {
+      ...mapState('test', ['test']),
+      users() {
+        return this.$store.getters.getTest
+      },
+    },
+    async created(){
+      await api.get(`entries`)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    },
   }
 </script>
 

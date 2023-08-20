@@ -1,6 +1,17 @@
 <template>
   <v-container>
-    <h4>Olá</h4>
+    <div class="panel_header">
+      <h4>Olá!</h4>
+
+      <v-btn
+        color="primary"
+        small
+        fab
+        to="/wallet"
+      >
+        <v-icon>mdi-account-school</v-icon>
+      </v-btn>
+    </div>
 
     <v-stepper
       v-model="currentStep"
@@ -133,3 +144,11 @@
     }
   }
 </script>
+
+<style>
+.panel_header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+</style>

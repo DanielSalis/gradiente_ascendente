@@ -36,7 +36,7 @@
     </v-tabs>
 
     <div class="navigation-buttons">
-      <v-btn to="/">
+      <v-btn to="/panel">
         Voltar
       </v-btn>
 

@@ -41,8 +41,6 @@ const actions = {
     await api.post("/content/resume-and-trivia", { contentUrl })
       .then((response) => {
         const { data } = response
-        console.log(data);
-
         const { resume, trivia } = data;
         state.commit("setContent", resume);
         state.commit("setQuiz", trivia);

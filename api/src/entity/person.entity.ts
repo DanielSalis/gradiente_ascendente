@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm'
 
 import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
+import UserEntity from './user.entity'
 
 @Entity()
 export class PersonEntity {
@@ -24,6 +25,10 @@ export class PersonEntity {
 
   @Column()
   phone: string
+
+  @OneToOne(() => UserEntity, user => user.person) // Add cascade option if needed
+  @JoinColumn()
+  user: UserEntity
 
   @Column()
   @CreateDateColumn()

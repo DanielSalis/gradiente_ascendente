@@ -1,11 +1,12 @@
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBadRequestResponse } from '@nestjs/swagger'
-import { Controller, Get, Query } from '@nestjs/common'
+import { Controller, Get, Query, UseGuards } from '@nestjs/common'
 
 import { Error } from '@app/swagger/error.model'
 // import { JwtAuthGuard } from '@app/guards/jwt-auth.guard'
 import { RetrieveCoupons } from '@app/usecase/retrieve-coupons'
 import { RetrieveCouponsInput } from '@app/input/retrieve-coupons.input'
 import { RetrieveCouponsOutput } from '@app/output/retrieve-coupons.output'
+import { JwtGuard } from '@app/guards/jwt-auth.guard'
 
 @ApiTags('Coupons')
 @Controller('/coupon')
@@ -21,7 +22,7 @@ export class RetrieveCouponsAction {
     description: 'Success response'
   })
   @Get()
-  // @AuthGuard()
+  @UseGuards(JwtGuard)
   action(@Query() input: RetrieveCouponsInput): Promise<RetrieveCouponsOutput> {
     return this.usecase.handle(input)
   }

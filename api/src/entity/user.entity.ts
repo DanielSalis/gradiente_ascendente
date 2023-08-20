@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, JoinColumn } from 'typeorm'
 
 import PersonEntity from '@app/entity/person.entity'
 import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
@@ -27,7 +27,8 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt: Date
 
-  @OneToOne(() => PersonEntity)
+  @OneToOne(() => PersonEntity, person => person.user, { eager: true })
+  @JoinColumn()
   person: PersonEntity
 
   @OneToOne(() => UserTriviaConfigEntity)

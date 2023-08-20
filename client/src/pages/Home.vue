@@ -1,9 +1,9 @@
 <template>
   <v-container class="centered-container">
-    <h3>Bem vindo a ferramenta!</h3>
+    <h3>Bem vindo ao SnapLearn!</h3>
 
     <p class="mt-4">
-      Já tem um token da OpenAI? Informe abaixo ou realize um cadastro para conseguir acumular pontos
+      Já tem um token da OpenAI? Informe abaixo ou realize um cadastro para acumular pontos
     </p>
 
     <div class="home__container mt-8">

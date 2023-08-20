@@ -49,6 +49,9 @@ Nest.js é um framework back-end para Node.js, que combina conceitos de programa
 #### Entidade relação do banco
 ![Entidade relação do banco](/assets/Untitled.png)
 
+#### Vídeo demo
+![Vídeo](/assets/video.webm)
+
 #### Executando a aplicação
 
 Front - iniciando

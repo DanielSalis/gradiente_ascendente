@@ -1,15 +1,6 @@
 <template>
   <v-container>
-    <h3>Informe seus dados abaixo</h3>
-
-    <div class="register__container mt-8">
-      <v-text-field
-        solo
-        hide-details
-        label="Nome"
-        placeholder="Nome"
-      />
-
+    <div class="login__container mt-8">
       <v-text-field
         solo
         hide-details
@@ -25,7 +16,7 @@
       />
 
       <v-btn color="primary">
-        Criar conta
+        Entrar
       </v-btn>
     </div>
   </v-container>
@@ -33,12 +24,12 @@
 
 <script>
   export default {
-    name: 'RegisterPage'
+    name: 'LoginPage'
   }
 </script>
 
 <style lang="scss" scoped>
-.register__container {
+.login__container {
   display: flex;
   flex-direction: column;
   row-gap: 16px;

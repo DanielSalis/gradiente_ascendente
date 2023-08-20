@@ -7,6 +7,8 @@ import { RetrieveUserInfoOutput } from '@app/output/retrieve-user-info.output'
 import UserEntity from '@app/entity/user.entity'
 import WalletEntity from '@app/entity/wallet.entity'
 import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class RetrieveUserInfo {
@@ -15,7 +17,9 @@ export class RetrieveUserInfo {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(UserEntity)
     private readonly walletRepository: Repository<WalletEntity>,
-    @InjectRepository(UserTriviaConfigEntity) private readonly userTriviaRepository: Repository<UserTriviaConfigEntity>
+    @InjectRepository(UserTriviaConfigEntity) private readonly userTriviaRepository: Repository<UserTriviaConfigEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: RetrieveUserInfoInput): Promise<RetrieveUserInfoOutput> {

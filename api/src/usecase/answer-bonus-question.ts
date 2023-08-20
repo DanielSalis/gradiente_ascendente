@@ -7,13 +7,17 @@ import { AnswerBonusQuestionOutput } from '@app/output/answer-bonus-question.out
 import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
 import QuestionBonusEntity from '@app/entity/question-bonus.entity'
 import UserEntity from '@app/entity/user.entity'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class AnswerBonusQuestion {
   constructor(
     @InjectRepository(QuestionBonusAnswerEntity) private readonly questionBonusAnswerRepository: Repository<QuestionBonusAnswerEntity>,
     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
-    @InjectRepository(QuestionBonusEntity) private readonly questionBonusRepository: Repository<QuestionBonusEntity>
+    @InjectRepository(QuestionBonusEntity) private readonly questionBonusRepository: Repository<QuestionBonusEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
   async handle(input: AnswerBonusQuestionInput): Promise<AnswerBonusQuestionOutput> {
     const questionBonus = await this.questionBonusRepository.findOne({ where: { id: input.questionId } })

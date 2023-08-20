@@ -8,6 +8,8 @@ import CouponEntity from '@app/entity/coupon.entity'
 import UserEntity from '@app/entity/user.entity'
 import WalletEntity from '@app/entity/wallet.entity'
 import TransactionEntity from '@app/entity/transaction.entity'
+import { ValidateService } from '@app/service/validate.service'
+import { ErrorService } from '@app/service/error.service'
 
 @Injectable()
 export class RedeemCoupon {
@@ -15,7 +17,9 @@ export class RedeemCoupon {
     @InjectRepository(CouponEntity) private readonly couponEntity: Repository<CouponEntity>,
     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(WalletEntity) private readonly walletRepository: Repository<WalletEntity>,
-    @InjectRepository(TransactionEntity) private readonly transactionRepository: Repository<TransactionEntity>
+    @InjectRepository(TransactionEntity) private readonly transactionRepository: Repository<TransactionEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: RedeemCouponInput): Promise<RedeemCouponOutput> {

@@ -9,6 +9,8 @@ import PersonEntity from '@app/entity/person.entity'
 import UserEntity from '@app/entity/user.entity'
 import WalletEntity from '@app/entity/wallet.entity'
 import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
+import { ValidateService } from '@app/service/validate.service'
+import { ErrorService } from '@app/service/error.service'
 
 @Injectable()
 export class CreateUser {
@@ -19,26 +21,30 @@ export class CreateUser {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(WalletEntity)
     private readonly walletRepository: Repository<WalletEntity>,
-    @InjectRepository(UserTriviaConfigEntity) private readonly triviaConfigRepository: Repository<UserTriviaConfigEntity>
+    @InjectRepository(UserTriviaConfigEntity) private readonly triviaConfigRepository: Repository<UserTriviaConfigEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: CreateUserInput): Promise<CreateUserOutput> {
+    const inputParsed = await this.validateService.validateAndTransformInput(CreateUserInput, input)
+
     // melhoria colocar isso em transactions
     const person = await this.personRepository.save(
       Object.assign(new PersonEntity(), {
-        firstName: input.firstName,
-        lastName: input.lastName,
-        document: input.document,
-        birthDate: input.birthDate,
-        email: input.email,
-        phone: input.phone
+        firstName: inputParsed.firstName,
+        lastName: inputParsed.lastName,
+        document: inputParsed.document,
+        birthDate: inputParsed.birthDate,
+        email: inputParsed.email,
+        phone: inputParsed.phone
       })
     )
 
     const user = await this.userRepository.save(
       Object.assign(new UserEntity(), {
-        login: input.email,
-        passwordHash: bcrypt.hashSync(input.password, 10),
+        login: inputParsed.email,
+        passwordHash: bcrypt.hashSync(inputParsed.password, 10),
         active: true,
         person: person
       })

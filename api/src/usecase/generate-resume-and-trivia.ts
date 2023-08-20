@@ -4,10 +4,16 @@ import { GenerateResumeInput } from '@app/input/generate-resume.input'
 import { GenerateResumeOutput } from '@app/output/generate-resume.output'
 import { AiAdapter } from '@app/adapter/ai.adapter'
 import { promptGenerateResumeAndTriviaTemplate } from '@app/adapter/templates/prompt-generate-resume-and-trivia.template'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class GenerateResumeAndTrivia {
-  constructor(private readonly aiAdapter: AiAdapter) {}
+  constructor(
+    private readonly aiAdapter: AiAdapter,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
+  ) {}
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
     const content = await this.getContent(input.contentUrl)
@@ -26,7 +32,11 @@ export class GenerateResumeAndTrivia {
     }
 
     const text = await response.text()
-    const body = text.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g)[0].replace(/<[^>]+>/g, '')
-    return body.slice(0, 2048)
+    const hasMatch = text.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g)
+    let contentToSlice = text
+    if (hasMatch) {
+      contentToSlice = hasMatch[0].replace(/<[^>]+>/g, '')
+    }
+    return contentToSlice.slice(0, 2048)
   }
 }

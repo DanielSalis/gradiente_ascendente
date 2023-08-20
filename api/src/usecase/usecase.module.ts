@@ -25,6 +25,7 @@ import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
 import UserEntity from '@app/entity/user.entity'
 import WalletEntity from '@app/entity/wallet.entity'
 import { AdapterModule } from '@app/adapter/adapter.module'
+import { ServiceModule } from '@app/service/service.module'
 
 @Module({
   imports: [
@@ -41,7 +42,8 @@ import { AdapterModule } from '@app/adapter/adapter.module'
       UserEntity,
       WalletEntity
     ]),
-    AdapterModule
+    AdapterModule,
+    ServiceModule
   ],
   providers: [
     AnswerBonusQuestion,

@@ -7,13 +7,17 @@ import * as bcrypt from 'bcrypt'
 import UserEntity from '@app/entity/user.entity'
 import { LoginOutput } from '@app/output/login.output'
 import { LoginInput } from '@app/input/login.input'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class Login {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: LoginInput): Promise<LoginOutput> {

@@ -7,6 +7,8 @@ import { SaveTriviaAnswersOutput } from '@app/output/save-trivia-answers.output'
 import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
 import TriviaHistoryEntity from '@app/entity/trivia-history.entity'
 import WalletEntity from '@app/entity/wallet.entity'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class SaveTriviaAnswers {
@@ -16,7 +18,9 @@ export class SaveTriviaAnswers {
     @InjectRepository(UserTriviaConfigEntity)
     private readonly triviaConfigRepository: Repository<UserTriviaConfigEntity>,
     @InjectRepository(WalletEntity)
-    private readonly walletRepository: Repository<WalletEntity>
+    private readonly walletRepository: Repository<WalletEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: SaveTriviaAnswersInput): Promise<SaveTriviaAnswersOutput> {

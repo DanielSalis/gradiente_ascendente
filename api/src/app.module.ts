@@ -11,7 +11,7 @@ import { ActionModule } from '@app/action/action.module'
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('PG_CONTAINER_NAME') || 'localhost',
+        host: configService.get('PG_HOST') || configService.get('PG_CONTAINER_NAME') || 'localhost',
         port: +configService.get<number>('POSTGRES_PORT'),
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),

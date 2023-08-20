@@ -6,12 +6,16 @@ import { CreateBonusQuestionsInput } from '@app/input/create-bonus-questions.inp
 import { CreateBonusQuestionsOutput } from '@app/output/create-bonus-questions.output'
 import QuestionBonusEntity from '@app/entity/question-bonus.entity'
 import PartnerEntity from '@app/entity/partner.entity'
+import { ErrorService } from '@app/service/error.service'
+import { ValidateService } from '@app/service/validate.service'
 
 @Injectable()
 export class CreateBonusQuestions {
   constructor(
     @InjectRepository(QuestionBonusEntity) private readonly questionBonusRepository: Repository<QuestionBonusEntity>,
-    @InjectRepository(PartnerEntity) private readonly partnerRepository: Repository<PartnerEntity>
+    @InjectRepository(PartnerEntity) private readonly partnerRepository: Repository<PartnerEntity>,
+    private readonly errorService: ErrorService,
+    private readonly validateService: ValidateService
   ) {}
 
   async handle(input: CreateBonusQuestionsInput): Promise<CreateBonusQuestionsOutput> {

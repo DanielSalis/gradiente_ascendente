@@ -1,19 +1,20 @@
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBadRequestResponse } from '@nestjs/swagger'
 import { Controller, Get } from '@nestjs/common'
 
-import { HttpValidationError } from '@app/rest/swagger/error.model'
+import { Error } from '@app/swagger/error.model'
+// import { AdminKeyGuard } from '@app/guards/admin-key.guard'
 
 @ApiTags('HealthCheck')
 @Controller('/')
 export class HealthCheckAction {
   @ApiOperation({ operationId: 'HealthCheck', summary: 'Health Check endpoint' })
   /*
-    Adding 'type: HttpValidationError' is workaround for 'Could not resolve reference: #/components/schemas/HttpValidationError'.
+    Adding 'type: Error' is workaround for 'Could not resolve reference: #/components/schemas/Error'.
     getSchemaPath adding "$ref: "#/components/schemas/CarrierEntitlementCreateInput" to the output, but not creating schema itself.
-    Thus in swagger json there is no HttpValidationError, but we have reference to is
+    Thus in swagger json there is no Error, but we have reference to is
   */
   @ApiBadRequestResponse({
-    type: HttpValidationError,
+    type: Error,
     description: 'Bad body request response'
   })
   @ApiOkResponse({
@@ -35,6 +36,7 @@ export class HealthCheckAction {
     description: 'Success response'
   })
   @Get()
+  // @UseGuards(AdminKeyGuard)
   action(): Record<string, string> {
     return {
       status: 'Ok',

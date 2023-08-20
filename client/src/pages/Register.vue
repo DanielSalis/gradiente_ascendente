@@ -24,7 +24,10 @@
         placeholder="Senha"
       />
 
-      <v-btn color="primary">
+      <v-btn
+        color="primary"
+        to="/created-account"
+      >
         Criar conta
       </v-btn>
 

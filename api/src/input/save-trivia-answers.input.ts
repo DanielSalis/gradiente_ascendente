@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator'
 
 class TriviaOption {
@@ -52,10 +52,17 @@ export class SaveTriviaAnswersInput {
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
+  @ApiProperty({ description: 'Trivia generated' })
   triviaGenerated: Array<Trivia>
 
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
+  @ApiProperty({ description: 'Trivia answers' })
   triviaAnswers: Array<TriviaAnswer>
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiHideProperty()
+  userId: string
 }

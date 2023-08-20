@@ -25,9 +25,9 @@ export class TransactionEntity {
   createdAt: Date
 
   @ManyToOne(() => CouponEntity, (coupon: CouponEntity) => coupon.transactions)
-  coupon: CouponEntity
+  coupon?: CouponEntity
 
   @ManyToOne(() => WalletEntity, (wallet: WalletEntity) => wallet.transactions)
-  wallet: WalletEntity
+  wallet?: WalletEntity
 }
 export default TransactionEntity

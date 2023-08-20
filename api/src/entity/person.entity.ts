@@ -14,7 +14,7 @@ export class PersonEntity {
   lastName: string
 
   @Column()
-  cpf: string
+  document: string
 
   @Column()
   birthDate: Date

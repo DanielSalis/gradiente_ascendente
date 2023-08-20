@@ -17,9 +17,6 @@ export class UserEntity {
   passwordHash: string
 
   @Column()
-  personId: string
-
-  @Column()
   active: boolean
 
   @Column()
@@ -37,9 +34,9 @@ export class UserEntity {
   usertriviaconfig: UserTriviaConfigEntity
 
   @OneToMany(() => TriviaHistoryEntity, (triviaHistory: TriviaHistoryEntity) => triviaHistory.user)
-  triviaHistories: TriviaHistoryEntity[]
+  triviaHistories?: TriviaHistoryEntity[]
 
   @OneToOne(() => WalletEntity)
-  walllet: WalletEntity
+  public wallet?: WalletEntity
 }
 export default UserEntity

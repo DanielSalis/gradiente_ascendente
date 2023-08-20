@@ -9,6 +9,9 @@ export class QuestionBonusEntity {
   id: string
 
   @Column()
+  title: string
+
+  @Column()
   @CreateDateColumn()
   createdAt: Date
 

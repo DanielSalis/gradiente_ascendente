@@ -1,9 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne } from 'typeorm'
+
+import UserEntity from '@app/entity/user.entity'
 
 @Entity()
 export class UserTriviaConfigEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
+
+  @OneToOne(() => UserEntity)
+  user: UserEntity
 
   @Column()
   questionPointsToEarn: number
@@ -13,9 +18,6 @@ export class UserTriviaConfigEntity {
 
   @Column()
   triviasToLevelUp: number
-
-  @Column()
-  currentLevel: number
 
   @Column()
   @CreateDateColumn()

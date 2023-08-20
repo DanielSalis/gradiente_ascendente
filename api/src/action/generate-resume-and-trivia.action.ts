@@ -5,13 +5,13 @@ import { Error } from '@app/swagger/error.model'
 // import { JwtAuthGuard } from '@app/guards/jwt-auth.guard'
 import { GenerateResumeInput } from '@app/input/generate-resume.input'
 import { GenerateResumeOutput } from '@app/output/generate-resume.output'
-import { GenerateResume } from '@app/usecase/generate-resume'
+import { GenerateResumeAndTrivia } from '@app/usecase/generate-resume-and-trivia'
 
 @ApiTags('Content')
-@Controller('/content/resume')
-export class GenerateResumeAction {
-  constructor(private readonly usecase: GenerateResume) {}
-  @ApiOperation({ operationId: 'GenerateResume', summary: 'Generate Resume endpoint' })
+@Controller('/content/resume-and-trivia')
+export class GenerateResumeAndTriviaAction {
+  constructor(private readonly usecase: GenerateResumeAndTrivia) {}
+  @ApiOperation({ operationId: 'GenerateResumeAndTrivia', summary: 'Generate resume and trivia endpoint' })
   @ApiBadRequestResponse({
     type: Error,
     description: 'Bad body request response'
@@ -20,7 +20,7 @@ export class GenerateResumeAction {
     description: 'Success response'
   })
   @Post()
-  // @UseGuards(JwtAuthGuard)
+  // @AuthGuard()
   action(@Body() input: GenerateResumeInput): Promise<GenerateResumeOutput> {
     return this.usecase.handle(input)
   }

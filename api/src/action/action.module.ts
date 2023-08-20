@@ -8,16 +8,16 @@ import { CreateCouponAction } from '@app/action/create-coupon.action'
 import { CreatePartnerAction } from '@app/action/create-partner.action'
 import { CreateUserAction } from '@app/action/create-user.action'
 import { ExportLeadsAction } from '@app/action/export-leads.action'
-import { GenerateResumeAction } from '@app/action/generate-resume.action'
-import { GenerateTriviaAction } from '@app/action/generate-trivia.action'
+import { GenerateResumeAndTriviaAction } from '@app/action/generate-resume-and-trivia.action'
 import { LoginAction } from '@app/action/login.action'
 import { RedeemCouponAction } from '@app/action/redeem-coupon.action'
 import { RetrieveCouponsAction } from '@app/action/retrieve-coupons'
 import { RetrieveUserInfoAction } from '@app/action/retrieve-user-info.action'
 import { SaveTriviaAnswersAction } from '@app/action/save-trivia-answers'
+import { AuthModule } from '@app/auth/auth.module'
 
 @Module({
-  imports: [UseCaseModule],
+  imports: [AuthModule, UseCaseModule],
   controllers: [
     HealthCheckAction,
     AnswerBonusQuestionAction,
@@ -26,8 +26,7 @@ import { SaveTriviaAnswersAction } from '@app/action/save-trivia-answers'
     CreatePartnerAction,
     CreateUserAction,
     ExportLeadsAction,
-    GenerateResumeAction,
-    GenerateTriviaAction,
+    GenerateResumeAndTriviaAction,
     LoginAction,
     RedeemCouponAction,
     RetrieveCouponsAction,

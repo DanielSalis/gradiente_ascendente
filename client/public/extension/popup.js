@@ -4,5 +4,5 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
   console.log(encodeURIComponent(tabs[0].url))
 
   var iframe = document.getElementById("myFrame");
-  iframe.src = "http://localhost:3000/panel?param="+encodeURIComponent(tabs[0].url);
+  iframe.src = "http://localhost:3000/?param="+encodeURIComponent(tabs[0].url);
 });

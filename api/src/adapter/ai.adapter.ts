@@ -27,11 +27,11 @@ export class AiAdapter {
       ]
     }
   */
-  public async completion(): Promise<unknown> {
+  public async completion(prompt: string): Promise<unknown> {
     try {
       const gptResponse = await this.aiInstance.complete({
         engine: 'davinci',
-        prompt: 'this is a test',
+        prompt,
         maxTokens: 5,
         temperature: 0.9,
         topP: 1,
@@ -44,19 +44,6 @@ export class AiAdapter {
       })
       return gptResponse
     } catch (error) {
-      console.error(error)
-    }
-  }
-
-  public async search(): Promise<unknown> {
-    try {
-      const gptResponse = await this.aiInstance.search({
-        engine: 'davinci',
-        documents: ['White House', 'hospital', 'school'],
-        query: 'the president'
-      })
-      return gptResponse
-    } catch (error: unknown) {
       console.error(error)
     }
   }

@@ -20,7 +20,7 @@ export class SaveTriviaAnswersAction {
     description: 'Success response'
   })
   @Post()
-  // @UseGuards(JwtAuthGuard)
+  @AuthGuard()
   action(@Body() input: SaveTriviaAnswersInput): Promise<SaveTriviaAnswersOutput> {
     return this.usecase.handle(input)
   }

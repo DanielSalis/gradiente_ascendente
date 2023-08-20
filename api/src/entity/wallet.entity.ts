@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne } from 'typeorm'
 
 import TransactionEntity from '@app/entity/transaction.entity'
+import PersonEntity from '@app/entity/person.entity'
 
 @Entity()
 export class WalletEntity {
@@ -9,6 +10,12 @@ export class WalletEntity {
 
   @Column()
   points: number
+
+  @Column()
+  currenExperiencePoints: number
+
+  @Column()
+  currentLevel: number
 
   @Column()
   coupons: string[]
@@ -23,5 +30,8 @@ export class WalletEntity {
 
   @OneToMany(() => TransactionEntity, (transaction: TransactionEntity) => transaction.wallet)
   transactions: TransactionEntity[]
+
+  @OneToOne(() => PersonEntity)
+  person: PersonEntity
 }
 export default WalletEntity

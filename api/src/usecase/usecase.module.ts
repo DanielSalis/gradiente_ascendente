@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { AnswerBonusQuestion } from '@app/usecase/answer-bonus-question'
 import { CreateBonusQuestions } from '@app/usecase/create-bonus-questions'
@@ -6,15 +7,38 @@ import { CreateCoupon } from '@app/usecase/create-coupon'
 import { CreateUser } from '@app/usecase/create-user'
 import { CreatePartner } from '@app/usecase/create-partner'
 import { ExportLeads } from '@app/usecase/export-leads'
-import { GenerateResume } from '@app/usecase/generate-resume'
-import { GenerateTrivia } from '@app/usecase/generate-trivia'
+import { GenerateResumeAndTrivia } from '@app/usecase/generate-resume-and-trivia'
 import { Login } from '@app/usecase/login'
 import { RedeemCoupon } from '@app/usecase/redeem-coupon'
 import { RetrieveCoupons } from '@app/usecase/retrieve-coupons'
 import { RetrieveUserInfo } from '@app/usecase/retrieve-user-info'
 import { SaveTriviaAnswers } from '@app/usecase/save-trivia-answers'
+import CouponEntity from '@app/entity/coupon.entity'
+import PartnerEntity from '@app/entity/partner.entity'
+import PersonEntity from '@app/entity/person.entity'
+import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
+import QuestionBonusEntity from '@app/entity/question-bonus.entity'
+import TransactionEntity from '@app/entity/transaction.entity'
+import TriviaHistoryEntity from '@app/entity/trivia-history.entity'
+import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
+import UserEntity from '@app/entity/user.entity'
+import WalletEntity from '@app/entity/wallet.entity'
 
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([
+      CouponEntity,
+      PartnerEntity,
+      PersonEntity,
+      QuestionBonusAnswerEntity,
+      QuestionBonusEntity,
+      TransactionEntity,
+      TriviaHistoryEntity,
+      UserTriviaConfigEntity,
+      UserEntity,
+      WalletEntity
+    ])
+  ],
   providers: [
     AnswerBonusQuestion,
     CreateBonusQuestions,
@@ -22,8 +46,7 @@ import { SaveTriviaAnswers } from '@app/usecase/save-trivia-answers'
     CreateUser,
     CreatePartner,
     ExportLeads,
-    GenerateResume,
-    GenerateTrivia,
+    GenerateResumeAndTrivia,
     Login,
     RedeemCoupon,
     RetrieveCoupons,
@@ -37,8 +60,7 @@ import { SaveTriviaAnswers } from '@app/usecase/save-trivia-answers'
     CreateUser,
     CreatePartner,
     ExportLeads,
-    GenerateResume,
-    GenerateTrivia,
+    GenerateResumeAndTrivia,
     Login,
     RedeemCoupon,
     RetrieveCoupons,

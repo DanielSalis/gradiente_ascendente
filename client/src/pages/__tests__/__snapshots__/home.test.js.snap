@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pages / Home when all data is correct should render the page 1`] = `
+<div
+  class="container"
+>
+  <h3>
+    Bem vindo a ferramenta!
+  </h3>
+   
+  <p
+    class="mt-4"
+  >
+    
+    Já tem um token da OpenAI? Informe abaixo ou realize um cadastro para conseguir acumular pontos
+  
+  </p>
+   
+  <div
+    class="home__container mt-8"
+  >
+    <div
+      class="home__container-token"
+    >
+      <div
+        class="v-input v-input--hide-details theme--light v-text-field v-text-field--single-line v-text-field--solo v-text-field--enclosed v-text-field--placeholder"
+      >
+        <div
+          class="v-input__control"
+        >
+          <div
+            class="v-input__slot"
+          >
+            <div
+              class="v-text-field__slot"
+            >
+              <label
+                class="v-label theme--light"
+                for="input-2"
+                style="left: 0px; position: absolute;"
+              >
+                Token
+              </label>
+              <input
+                id="input-2"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+       
+      <button
+        class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--large primary"
+        type="button"
+      >
+        <span
+          class="v-btn__content"
+        >
+          <i
+            aria-hidden="true"
+            class="v-icon notranslate mdi mdi-arrow-right theme--light"
+          />
+        </span>
+      </button>
+    </div>
+    
+    OU
+    
+    <a
+      class="v-btn v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--default primary"
+    >
+      <span
+        class="v-btn__content"
+      >
+        
+      Criar conta
+    
+      </span>
+    </a>
+     
+    <button
+      class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
+      type="button"
+    >
+      <span
+        class="v-btn__content"
+      >
+        Já tenho uma conta
+      </span>
+    </button>
+  </div>
+</div>
+`;

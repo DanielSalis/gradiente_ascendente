@@ -1,11 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 
+import QuestionBonusEntity from '@app/entity/question-bonus.entity'
+import PersonEntity from '@app/entity/person.entity'
+
 @Entity()
 export class QuestionBonusAnswerEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
-
-  // adicionar relaccao com question bonus entity e person entity
 
   @Column()
   value: string[]
@@ -17,5 +18,11 @@ export class QuestionBonusAnswerEntity {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date
+
+  @ManyToOne(() => QuestionBonusEntity, (questionBonus: QuestionBonusEntity) => questionBonus.questionbonusAnswer)
+  questionBonus: QuestionBonusEntity
+
+  @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.questionBonusAnswer)
+  person: PersonEntity
 }
 export default QuestionBonusAnswerEntity

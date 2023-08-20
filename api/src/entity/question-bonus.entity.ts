@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, ManyToOne, OneToMany } from 'typeorm'
 
 import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
 import PartnerEntity from '@app/entity/partner.entity'
@@ -16,9 +16,7 @@ export class QuestionBonusEntity {
   @UpdateDateColumn()
   updatedAt: Date
 
-  // Ajustar relation, uma questao bonus pode ter varias respostas de usuarios diferentes
-
-  @OneToOne(() => QuestionBonusAnswerEntity)
+  @OneToMany('QuestionBonusAnswerEntity', (questionbonusAnswer: QuestionBonusAnswerEntity) => questionbonusAnswer.questionBonus)
   questionbonusAnswer: QuestionBonusAnswerEntity
 
   @ManyToOne(() => PartnerEntity, (partner: PartnerEntity) => partner.questionsBonus)

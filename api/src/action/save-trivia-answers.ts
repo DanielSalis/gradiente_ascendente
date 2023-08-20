@@ -17,6 +17,7 @@ export class SaveTriviaAnswersAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: SaveTriviaAnswersOutput,
     description: 'Success response'
   })
   @Post()

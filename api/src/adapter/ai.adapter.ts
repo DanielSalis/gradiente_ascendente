@@ -29,24 +29,17 @@ export class AiAdapter {
     try {
       const gptInstace = this.getInstance()
       const gptResponse = await gptInstace.completions.create({
-        model: 'davinci',
+        model: 'text-davinci-003',
         prompt,
-        maxTokens: 2048,
         temperature: 0.0,
-        topP: 1,
-        presencePenalty: 0,
-        frequencyPenalty: 0,
-        bestOf: 1,
-        n: 1,
-        stream: false,
-        stop: null
+        max_tokens: 2048,
+        n: 1
       })
-      return gptResponse
+      return gptResponse.choices[0].text
     } catch (error) {
       console.error(error)
     }
   }
-
 
   private getInstance(): OpenAI {
     if (this.aiInstance) {

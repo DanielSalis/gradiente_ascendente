@@ -17,6 +17,7 @@ export class CreatePartnerAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: CreatePartnerOutput,
     description: 'Success response'
   })
   @Post()

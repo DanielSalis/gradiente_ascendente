@@ -1,41 +1,41 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
-import TransactionEntity from './transaction.entity';
-import PartnerEntity from './partner.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne } from 'typeorm'
+
+import TransactionEntity from '@app/entity/transaction.entity'
+import PartnerEntity from '@app/entity/partner.entity'
 
 @Entity()
 export class CouponEntity {
   @PrimaryGeneratedColumn('uuid')
-  public id: string
-
-  @Column() 
-  public coupon_code: string
-
-  @Column() 
-  public partner_id: string
+  id: string
 
   @Column()
-  public quantity: number
-  
-  @Column()
-  public value: number
+  coupon_code: string
 
   @Column()
-  public vality: Date
+  partner_id: string
+
+  @Column()
+  quantity: number
+
+  @Column()
+  value: number
+
+  @Column()
+  vality: Date
 
   @Column()
   @CreateDateColumn()
-  public createdAt: Date
+  createdAt: Date
 
   @Column()
   @UpdateDateColumn()
-  public updatedAt: Date
+  updatedAt: Date
 
-  @OneToMany(() => TransactionEntity, (transaction: TransactionEntity) => transaction.coupon)
-  public transaction: TransactionEntity[];
+  @OneToMany('TransactionEntity', (transaction: TransactionEntity) => transaction.coupon)
+  transactions: TransactionEntity[]
 
-  @ManyToOne(() => PartnerEntity, (partner: PartnerEntity) => partner.coupon) 
-  public partner: PartnerEntity;
-
+  @ManyToOne('PartnerEntity', (partner: PartnerEntity) => partner.coupons)
+  partner: PartnerEntity
 }
 
-export default CouponEntity;
+export default CouponEntity

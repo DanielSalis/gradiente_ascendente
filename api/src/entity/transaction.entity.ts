@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne } from 'typeorm'
-import CouponEntity from './coupon.entity';
-import PersonEntity from './person.entity';
-import WalletEntity from './wallet.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm'
+
+import CouponEntity from '@app/entity/coupon.entity'
+import WalletEntity from '@app/entity/wallet.entity'
 
 @Entity()
 export class TransactionEntity {
@@ -24,14 +24,10 @@ export class TransactionEntity {
   @CreateDateColumn()
   createdAt: Date
 
-  @ManyToOne(() => CouponEntity, (coupon: CouponEntity) => coupon.transaction) 
-  public coupon: CouponEntity;
+  @ManyToOne(() => CouponEntity, (coupon: CouponEntity) => coupon.transactions)
+  coupon: CouponEntity
 
-  @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.transaction) 
-  public person: PersonEntity;
-
-  @ManyToOne(() => WalletEntity, (wallet: WalletEntity) => wallet.transaction) 
-  public wallet: WalletEntity;
-
+  @ManyToOne(() => WalletEntity, (wallet: WalletEntity) => wallet.transactions)
+  wallet: WalletEntity
 }
-export default TransactionEntity;
+export default TransactionEntity

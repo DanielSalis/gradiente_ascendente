@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import QuestionBonusAnswerEntity from './question-bonus-answer.entity';
-import PartnerEntity from './partner.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, ManyToOne } from 'typeorm'
+
+import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
+import PartnerEntity from '@app/entity/partner.entity'
 
 @Entity()
 export class QuestionBonusEntity {
@@ -15,11 +16,12 @@ export class QuestionBonusEntity {
   @UpdateDateColumn()
   updatedAt: Date
 
+  // Ajustar relation, uma questao bonus pode ter varias respostas de usuarios diferentes
+
   @OneToOne(() => QuestionBonusAnswerEntity)
-  public questionbonusanswer: QuestionBonusAnswerEntity;
+  questionbonusAnswer: QuestionBonusAnswerEntity
 
-  @ManyToOne(() => PartnerEntity, (person: PartnerEntity) => partner.questiobonus) 
-  public partner: PartnerEntity;
+  @ManyToOne(() => PartnerEntity, (partner: PartnerEntity) => partner.questionsBonus)
+  partner: PartnerEntity
 }
-
-export default QuestionBonusEntity;
+export default QuestionBonusEntity

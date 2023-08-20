@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import TransactionEntity from './transaction.entity';
 
 @Entity()
 export class PersonEntity {
@@ -31,9 +30,6 @@ export class PersonEntity {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date
-
-  @OneToMany(() => TransactionEntity, (transaction: TransactionEntity) => transaction.person)
-  public transaction: TransactionEntity[];
 }
 
-export default PersonEntity;
+export default PersonEntity

@@ -79,16 +79,17 @@ exports[`Pages / Home when all data is correct should render the page 1`] = `
       </span>
     </a>
      
-    <button
-      class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default"
-      type="button"
+    <a
+      class="v-btn v-btn--is-elevated v-btn--has-bg v-btn--router theme--light v-size--default"
     >
       <span
         class="v-btn__content"
       >
-        Já tenho uma conta
+        
+      Já tenho uma conta
+    
       </span>
-    </button>
+    </a>
   </div>
 </div>
 `;

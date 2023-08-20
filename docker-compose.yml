@@ -34,7 +34,6 @@ services:
       - app-network
 
   db:
-    container_name: postgres13_hackathon
     image: postgres:13
     env_file:
       - ./.env

@@ -35,10 +35,14 @@ export class AiAdapter {
         max_tokens: 2048,
         n: 1
       })
-      return <Record<string, unknown>>JSON.parse(gptResponse.choices[0].text)
+      return this.hadleResult(gptResponse.choices[0].text)
     } catch (error) {
       console.error(error)
     }
+  }
+
+  private hadleResult(result: string): Record<string, unknown> {
+    return JSON.parse(result.replace('\n', ''))
   }
 
   private getInstance(): OpenAI {

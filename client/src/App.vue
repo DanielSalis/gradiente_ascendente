@@ -21,9 +21,11 @@
 
 .default-layout {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 nav {

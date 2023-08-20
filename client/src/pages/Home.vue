@@ -22,7 +22,10 @@
         </v-btn>
       </div>
       OU
-      <v-btn color="primary">
+      <v-btn
+        color="primary"
+        to="/register"
+      >
         Criar conta
       </v-btn>
 

@@ -20,7 +20,7 @@ export class RedeemCouponAction {
     description: 'Success response'
   })
   @Post()
-  @AuthGuard()
+  // @AuthGuard()
   action(@Body() input: RedeemCouponInput): Promise<RedeemCouponOutput> {
     return this.usecase.handle(input)
   }

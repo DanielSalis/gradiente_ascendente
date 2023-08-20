@@ -16,7 +16,7 @@ export const promptGenerateResumeAndTriviaTemplate = (textBase: string): string 
   ${textBase}
 
 
-  Provide the output in JSON format with thefollowing  format:
+  Provide the output in JSON format with the following  format:
   [
     {
       id: string,

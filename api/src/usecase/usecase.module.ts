@@ -23,9 +23,12 @@ import TriviaHistoryEntity from '@app/entity/trivia-history.entity'
 import UserTriviaConfigEntity from '@app/entity/user-trivia-config.entity'
 import UserEntity from '@app/entity/user.entity'
 import WalletEntity from '@app/entity/wallet.entity'
+import { AdapterModule } from '@app/adapter/adapter.module'
+import { JwtModule } from '@nestjs/jwt'
 
 @Module({
   imports: [
+    JwtModule.register({ secret: 'hard!to-guess_secret' }),
     TypeOrmModule.forFeature([
       CouponEntity,
       PartnerEntity,
@@ -37,7 +40,9 @@ import WalletEntity from '@app/entity/wallet.entity'
       UserTriviaConfigEntity,
       UserEntity,
       WalletEntity
-    ])
+    ]),
+    AdapterModule,
+
   ],
   providers: [
     AnswerBonusQuestion,

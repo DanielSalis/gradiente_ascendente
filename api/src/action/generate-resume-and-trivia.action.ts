@@ -20,7 +20,7 @@ export class GenerateResumeAndTriviaAction {
     description: 'Success response'
   })
   @Post()
-  // @AuthGuard()
+  // // @AuthGuard()
   action(@Body() input: GenerateResumeInput): Promise<GenerateResumeOutput> {
     return this.usecase.handle(input)
   }

@@ -13,7 +13,7 @@ export class GenerateResumeAndTrivia {
 
   async handle(input: GenerateResumeInput): Promise<GenerateResumeOutput> {
     const content = await this.getContent(input.contentUrl)
-    const contentGenerated = await this.aiAdapter.callOpenAIChatAPI(promptGenerateResumeAndTriviaTemplate(content))
+    const contentGenerated = await this.aiAdapter.completion(promptGenerateResumeAndTriviaTemplate(content))
     console.log(contentGenerated)
     return Promise.resolve(<GenerateResumeOutput>{})
   }
@@ -27,6 +27,6 @@ export class GenerateResumeAndTrivia {
 
     const text = await response.text()
     const body = text.match(/(?<=<body>)([\s\S]*?)(?=<\/body>)/g)[0].replace(/<[^>]+>/g, '')
-    return body
+    return body.slice(0, 2048)
   }
 }

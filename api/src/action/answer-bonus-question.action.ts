@@ -1,6 +1,6 @@
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBadRequestResponse } from '@nestjs/swagger'
 import { Body, Controller, Post } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
+// import { AuthGuard } from '@nestjs/passport'
 
 import { Error } from '@app/swagger/error.model'
 // import { JwtAuthGuard } from '@app/guards/jwt-auth.guard'
@@ -19,6 +19,7 @@ export class AnswerBonusQuestionAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: AnswerBonusQuestionOutput,
     description: 'Success response'
   })
   @Post()

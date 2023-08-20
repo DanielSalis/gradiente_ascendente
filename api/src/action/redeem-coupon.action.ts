@@ -17,6 +17,7 @@ export class RedeemCouponAction {
     description: 'Bad body request response'
   })
   @ApiOkResponse({
+    type: RedeemCouponOutput,
     description: 'Success response'
   })
   @Post()

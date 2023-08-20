@@ -5,6 +5,7 @@ import Home from '../pages/Home.vue'
 import Register from '../pages/Register.vue'
 import Login from '../pages/Login.vue'
 import Panel from '../pages/Panel.vue'
+import Wallet from '../pages/Wallet.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/panel',
     name: 'panel',
     component: Panel
+  },
+  {
+    path: '/wallet',
+    name: 'wallet',
+    component: Wallet
   },
 ]
 

@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class CreateCouponInput {
@@ -21,4 +21,9 @@ export class CreateCouponInput {
   @IsNumber()
   @ApiProperty({ description: '' })
   expirationDays: number
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiHideProperty()
+  partnerId: string
 }

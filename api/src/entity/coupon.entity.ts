@@ -9,19 +9,13 @@ export class CouponEntity {
   id: string
 
   @Column()
-  coupon_code: string
-
-  @Column()
-  partner_id: string
+  code: string
 
   @Column()
   quantity: number
 
   @Column()
   value: number
-
-  @Column()
-  vality: Date
 
   @Column()
   @CreateDateColumn()

@@ -20,7 +20,7 @@ export class RetrieveCouponsAction {
     description: 'Success response'
   })
   @Get()
-  // @UseGuards(JwtAuthGuard)
+  @AuthGuard()
   action(@Query() input: RetrieveCouponsInput): Promise<RetrieveCouponsOutput> {
     return this.usecase.handle(input)
   }

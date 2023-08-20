@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h4>Olá, {nome do aluno}</h4>
+    <h4>Olá</h4>
 
     <v-stepper
       v-model="currentStep"

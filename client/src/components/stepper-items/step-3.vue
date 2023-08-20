@@ -4,11 +4,11 @@
       v-for="(item, index) in quiz"
       :key="index"
     >
-      <h4>{{ item.title }}</h4>
+      <h4>{{ item.question }}</h4>
 
       <v-radio-group v-model="selectedOption[index]">
         <v-radio
-          v-for="(option, optionIndex) in item.alternatives"
+          v-for="(option, optionIndex) in item.options"
           :key="optionIndex"
           :label="option"
           :value="option"
@@ -31,13 +31,13 @@
       }
     },
     computed:{
-      ...mapState('quiz', ['quiz']),
+      ...mapState('content', ['quiz']),
       answers() {
         return this.rightAnswers === this.response.length
       }
     },
     methods: {
-      ...mapActions('quiz', ['setAnswers']),
+      ...mapActions('content', ['setAnswers']),
     }
   }
 </script>

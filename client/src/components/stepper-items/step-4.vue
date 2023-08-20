@@ -9,7 +9,7 @@
   export default {
     name: 'Step4Item',
     computed: {
-      ...mapState('quiz', ['quiz', 'rightAnswers']),
+      ...mapState('content', ['quiz', 'rightAnswers']),
     }
   }
 </script>

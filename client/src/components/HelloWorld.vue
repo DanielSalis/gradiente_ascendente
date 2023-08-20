@@ -90,8 +90,10 @@
     </v-row>
 
     <v-btn
-  elevation="2"
->TESTE</v-btn>
+      elevation="2"
+    >
+      TESTE
+    </v-btn>
   </v-container>
 </template>
 

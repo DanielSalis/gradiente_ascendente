@@ -2,18 +2,29 @@
   <v-container>
     <h3>Bem vindo a ferramenta!</h3>
 
-    <p class="mt-4">Já tem um token da OpenAI? Informe abaixo ou realize um cadastro para conseguir acumular pontos</p>
+    <p class="mt-4">
+      Já tem um token da OpenAI? Informe abaixo ou realize um cadastro para conseguir acumular pontos
+    </p>
 
     <div class="home__container mt-8">
-
       <div class="home__container-token">
-        <v-text-field solo hide-details label="Token" placeholder="Token"></v-text-field>
-        <v-btn color="primary" large>
+        <v-text-field
+          solo
+          hide-details
+          label="Token"
+          placeholder="Token"
+        />
+        <v-btn
+          color="primary"
+          large
+        >
           <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
       </div>
       OU
-      <v-btn color="primary">Criar conta</v-btn>
+      <v-btn color="primary">
+        Criar conta
+      </v-btn>
 
       <v-btn>Já tenho uma conta</v-btn>
     </div>

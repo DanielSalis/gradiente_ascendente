@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  hackaton-db:
+  hackathon-db:
     build:
       context: .
       dockerfile: docker/database/Dockerfile
@@ -12,18 +12,18 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '5432:5432'
+      - '45432:5432'
     restart: unless-stopped
-  hackaton-api:
+  hackathon-api:
     build:
       context: .
       dockerfile: docker/api/Dockerfile
       args:
         ENVIRONMENT: ${environment}
-    container_name: hackaton-api
+    container_name: hackathon-api
     ports:
       - 80:80
     env_file:
       - .env
     depends_on:
-      - hackaton-db
+      - hackathon-db

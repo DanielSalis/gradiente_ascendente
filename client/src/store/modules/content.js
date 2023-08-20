@@ -1,7 +1,7 @@
 import { api } from '../../utils/api';
 
  const state = {
-  content: "",
+  content: null,
   quiz: [],
   answers: [],
   rightAnswers: 0,
@@ -37,39 +37,21 @@ const actions = {
     // salvar o numero de respostas certas como pontos no banco
     state.commit("setRightAnswers", value);
   },
-  async fetchContent(state, urlParam) {
-    const response = await api.get("/trivia/answer", urlParam)
-    console.log(response);
-    console.log(urlParam)
+  async fetchContent(state, contentUrl) {
+    await api.post("/content/resume-and-trivia", { contentUrl })
+      .then((response) => {
+        const { data } = response
+        console.log(data);
 
-    // const { summary, quiz } = response;
-    const { summary, questions } = {
-      questions: [
-        {
-          'question': 'Teste',
-          'options': [
-            "a) teste teste",
-            "b) teste teste 2",
-            "c) teste teste 3",
-          ],
-          'answer': 'a) teste teste'
-        },
-        {
-          'question': 'Teste2',
-          'options': [
-            "a) teste teste",
-            "b) teste teste 2",
-            "c) teste teste 3",
-          ],
-          'answer': 'a) teste teste'
-        }
-      ],
-      summary: "bla bla bla"
-    }
-
-    console.log(questions);
-    state.commit("setContent", summary);
-    state.commit("setQuiz", questions);
+        const { resume, trivia } = data;
+        state.commit("setContent", resume);
+        state.commit("setQuiz", trivia);
+        return data;
+      })
+      .catch((error) => {
+        console.log(error);
+        return null;
+      })
   },
 }
 

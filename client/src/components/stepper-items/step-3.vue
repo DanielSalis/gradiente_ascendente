@@ -4,14 +4,16 @@
       v-for="(item, index) in quiz"
       :key="index"
     >
-      <h4>{{ item.question }}</h4>
+      <h4 class="trivia_question">
+        {{ item.id }} - {{ item.text }}
+      </h4>
 
       <v-radio-group v-model="selectedOption[index]">
         <v-radio
           v-for="(option, optionIndex) in item.options"
           :key="optionIndex"
-          :label="option"
-          :value="option"
+          :label="`${option.id}) ${option.text}`"
+          :value="option.id"
           @change="setAnswers(selectedOption)"
         />
       </v-radio-group>
@@ -32,9 +34,6 @@
     },
     computed:{
       ...mapState('content', ['quiz']),
-      answers() {
-        return this.rightAnswers === this.response.length
-      }
     },
     methods: {
       ...mapActions('content', ['setAnswers']),
@@ -42,4 +41,7 @@
   }
 </script>
 <style>
+.trivia_question {
+  text-align: left;
+}
 </style>

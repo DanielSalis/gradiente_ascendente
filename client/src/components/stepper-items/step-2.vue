@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+  <div v-if="content">
+    <p>{{ content }}</p>
 
     <v-divider />
 
@@ -8,10 +8,18 @@
       Quer ganhar pontos? Responda o Quiz
     </h4>
   </div>
+
+  <p v-else>
+    Não foi possível obter o resultado, tente novamente mais tarde.
+  </p>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
-    name: 'Step2Item'
+    name: 'Step2Item',
+    computed:{
+      ...mapState('content', ['content']),
+    },
   }
 </script>

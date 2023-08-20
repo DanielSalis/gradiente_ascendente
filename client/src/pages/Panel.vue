@@ -42,6 +42,7 @@
             <v-btn
               color="primary"
               size="small"
+              :loading="isLoading"
               @click="advance"
             >
               {{ step.buttonText }}
@@ -70,6 +71,7 @@
     },
     data() {
       return {
+        isLoading: false,
         currentStep: 1,
         steps: [
           {
@@ -103,11 +105,13 @@
     },
     methods: {
       ...mapActions('content', ['savePoints', 'fetchContent']),
-      advance() {
+      async advance() {
         switch(this.currentStep)
         {
           case 1:
-            this.fetchContent(this.$route.query.param)
+            this.isLoading = true
+            await this.fetchContent(this.$route.query.param)
+            this.isLoading = false
             break;
           case 3:
             this.checkAnswers()
@@ -120,7 +124,7 @@
       },
       checkAnswers() {
         let rightAnswers = this.quiz.filter((question, index) => {
-          return question.answer == this.answers[index]
+          return question.correctOptionId == this.answers[index]
         })
 
         console.log(rightAnswers.length);

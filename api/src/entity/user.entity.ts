@@ -42,6 +42,4 @@ export class UserEntity {
   @OneToOne(() => WalletEntity)
   walllet: WalletEntity
 }
-
-
 export default UserEntity

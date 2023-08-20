@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm'
 
 import QuestionBonusEntity from '@app/entity/question-bonus.entity'
 import PersonEntity from '@app/entity/person.entity'
@@ -22,7 +22,7 @@ export class QuestionBonusAnswerEntity {
   @ManyToOne(() => QuestionBonusEntity, (questionBonus: QuestionBonusEntity) => questionBonus.questionbonusAnswer)
   questionBonus: QuestionBonusEntity
 
-  @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.questionBonusAnswer)
+  @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.questionBonusAnswers)
   person: PersonEntity
 }
 export default QuestionBonusAnswerEntity

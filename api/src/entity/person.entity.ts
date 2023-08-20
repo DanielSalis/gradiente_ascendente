@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm'
 
 import QuestionBonusAnswerEntity from '@app/entity/question-bonus-answer.entity'
 
@@ -34,8 +34,7 @@ export class PersonEntity {
   updatedAt: Date
 
   @OneToMany('QuestionBonusAnswerEntity', (questionBonusAnswer: QuestionBonusAnswerEntity) => questionBonusAnswer.person)
-  questionBonusAnswer: QuestionBonusAnswerEntity[]
-
+  questionBonusAnswers: QuestionBonusAnswerEntity[]
 }
 
 export default PersonEntity

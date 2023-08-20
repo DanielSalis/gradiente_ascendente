@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import OpenAI from 'openai-api'
+import OpenAI from 'openai'
 
 @Injectable()
 export class AiAdapter {
-  private readonly aiInstance: OpenAI
-  constructor(private readonly configService: ConfigService) {
-    this.aiInstance = new OpenAI(configService.get('OPENAI_API_KEY'))
-  }
+  private aiInstance: OpenAI
+  constructor(private readonly configService: ConfigService) {}
 
   /*
     Example of a completion success response:
@@ -29,22 +27,33 @@ export class AiAdapter {
   */
   public async completion(prompt: string): Promise<unknown> {
     try {
-      const gptResponse = await this.aiInstance.complete({
-        engine: 'davinci',
+      const gptInstace = this.getInstance()
+      const gptResponse = await gptInstace.completions.create({
+        model: 'davinci',
         prompt,
-        maxTokens: 5,
-        temperature: 0.9,
+        maxTokens: 2048,
+        temperature: 0.0,
         topP: 1,
         presencePenalty: 0,
         frequencyPenalty: 0,
         bestOf: 1,
         n: 1,
         stream: false,
-        stop: ['\n', 'testing']
+        stop: null
       })
       return gptResponse
     } catch (error) {
       console.error(error)
     }
+  }
+
+
+  private getInstance(): OpenAI {
+    if (this.aiInstance) {
+      return this.aiInstance
+    }
+
+    this.aiInstance = new OpenAI(this.configService.get('OPENAI_API_KEY'))
+    return this.aiInstance
   }
 }

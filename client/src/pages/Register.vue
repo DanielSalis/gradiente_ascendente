@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="centered-container">
     <h3>Informe seus dados abaixo</h3>
 
     <div class="register__container mt-8">

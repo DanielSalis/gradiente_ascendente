@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="centered-container">
     <div class="login__container mt-8">
       <v-text-field
         solo
@@ -15,7 +15,10 @@
         placeholder="Senha"
       />
 
-      <v-btn color="primary">
+      <v-btn
+        color="primary"
+        to="/panel"
+      >
         Entrar
       </v-btn>
     </div>

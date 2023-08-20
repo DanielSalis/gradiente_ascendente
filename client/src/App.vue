@@ -21,11 +21,9 @@
 
 .default-layout {
   display: flex;
-  min-height: 100vh;
-  padding: 20px;
   justify-content: center;
-  align-items: center;
-  margin: auto;
+  min-height: 100vh;
+  padding: 8px;
 }
 
 nav {

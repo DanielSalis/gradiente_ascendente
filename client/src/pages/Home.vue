@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="centered-container">
     <h3>Bem vindo a ferramenta!</h3>
 
     <p class="mt-4">

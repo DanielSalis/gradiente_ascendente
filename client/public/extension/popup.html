@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" scrolling="no">
-  <head></head>
-  <body>
-    <iframe id="myFrame" width="460" height="500" frameborder="0"></iframe>
+  <head>
     <script src="./popup.js"></script>
+  </head>
+  <body>
+    <div class="frame-container">
+      <iframe id="myFrame" height="590"></iframe>
+    </div>
   </body>
 </html>
-<style></style>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .frame-container {
+    max-width: 800px;
+    min-width: 500px;
+  }
+
+  #myFrame {
+    border: none;
+    width: -webkit-fill-available;
+  }
+</style>

@@ -6,6 +6,14 @@
   </v-app>
 </template>
 
+<script>
+  export default {
+    created(){
+      console.log("route", this.$route.query.param)
+    }
+  }
+</script>
+
 <style lang="scss">
 :deep(.v-application--wrap) {
   overflow: hidden;

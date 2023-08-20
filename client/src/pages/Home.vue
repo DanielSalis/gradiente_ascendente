@@ -33,8 +33,6 @@
         Já tenho uma conta
       </v-btn>
     </div>
-
-    {{ test }}
   </v-container>
 </template>
 
